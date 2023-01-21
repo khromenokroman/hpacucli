@@ -133,7 +133,7 @@ hpacucli ctrl slot=0 ld 2 delete
 hpacucli ctrl slot=0 ld 2 add drives=1I:1:3
 
 Добавление дискового пространства (принудительно)
-hpacucli> ctrl slot=0 ld 2 modify size=500 forced
+hpacucli ctrl slot=0 ld 2 modify size=500 forced
 
 Добавление резервного диска spare
-hpacucli> ctrl slot=0 array all add spares=1I:1:3,1I:1:4
+hpacucli ctrl slot=0 array all add spares=1I:1:3,1I:1:4
