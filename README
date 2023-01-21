@@ -1,0 +1,101 @@
+Использование:
+
+hpacucli ctrl all show config
+
+Smart Array P400 in Slot 3 (sn: PA5360J9STT1T1)
+ array A (SATA, Unused Space: 0 MB)
+ logicaldrive 1 (1.4 TB, RAID 5, Recovering, 0% complete)
+ physicaldrive 1I:0:1 (port 1I:box 0:bay 1, SATA, 500 GB, OK)
+ physicaldrive 1I:0:2 (port 1I:box 0:bay 2, SATA, 500 GB, OK)
+ physicaldrive 1I:0:3 (port 1I:box 0:bay 3, SATA, 500 GB, OK)
+ physicaldrive 1I:0:4 (port 1I:box 0:bay 4, SATA, 1 TB, Rebuilding)
+
+Сокращения, которые можно использовать в командах
+
+chassisname = ch
+controller = ctrl
+logicaldrive = ld
+physicaldrive = pd
+drivewritecache = dwc
+
+Управление контроллером дискового массива
+
+Показать информацию
+hpacucli ctrl all show config
+
+Показать информацию (детально)
+hpacucli ctrl all show config detail
+
+Статус контроллера
+hpacucli ctrl all show status
+
+Управление кэшированием
+hpacucli ctrl slot=0 modify dwc=disable
+hpacucli ctrl slot=0 modify dwc=enable
+
+Пересканировать устройства, добавленные с момента последнего сканирования
+hpacucli rescandetects newly added devices since the last rescan
+
+Изменение Cache Ratio:
+hpacucli ctrl slot=3 modify cacheratio=25/75
+
+Управление физическими дисками в массиве
+
+Показать информацию (детально)
+hpacucli ctrl slot=0 pd all show
+hpacucli ctrl slot=0 pd 2:3 show detail
+
+Можно указать определенный слот для отображения информации только по определенному диску
+
+Статус дисков
+hpacucli ctrl slot=0 pd all show status
+hpacucli ctrl slot=0 pd 2:3 show status
+
+Очистка
+hpacucli ctrl slot=0 pd 2:3 modify erase
+
+Управление диодами на дисках
+hpacucli ctrl slot=0 pd 2:3 modify led=on
+hpacucli ctrl slot=0 pd 2:3 modify led=off
+
+Управление логическими дисками
+
+Показать информацию (детально)
+hpacucli ctrl slot=0 ld all show [detail]
+hpacucli ctrl slot=0 ld 4 show [detail]
+
+Статус дисков
+hpacucli ctrl slot=0 ld all show status
+hpacucli ctrl slot=0 ld 4 show status
+
+Управление диодами на дисках
+hpacucli ctrl slot=0 ld 4 modify led=on
+hpacucli ctrl slot=0 ld 4 modify led=off
+
+Перезапустить «отказавшие» диски
+hpacucli ctrl slot=0 ld 4 modify reenable forced
+
+Создание дисков
+логический диск
+hpacucli ctrl slot=0 create type=ld drives=1:12 raid=0
+
+логический диск — чередование
+hpacucli ctrl slot=0 create type=ld drives=1:13,1:14 size=300 raid=1
+
+логический диск — raid 5
+hpacucli ctrl slot=0 create type=ld drives=1:13,1:14,1:15,1:16,1:17 raid=5 
+drives — конкретные диски, все диски (all drives) или неиспользуемые диски(unassigned drives)
+size -размер логического диска в Мб
+raid — тип raid 0, 1 , 1+0 and 5
+
+Удаление
+hpacucli ctrl slot=0 ld 4 delete
+
+Добавление дисков
+hpacucli ctrl slot=0 ld 4 add drives=2:3
+
+Добавление дискового пространства (принудительно)
+hpacucli> ctrl slot=0 ld 4 modify size=500 forced
+
+Добавление резервного диска spare
+hpacucli> ctrl slot=0 array all add spares=1:5,1:7
