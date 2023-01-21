@@ -2,7 +2,7 @@
 
 hpacucli ctrl all show config
 
-Smart Array P400 in Slot 3 (sn: PA5360J9STT1T1)
+Smart Array P400 in Slot 0 (sn: PA5360J9STT1T1)
  array A (SATA, Unused Space: 0 MB)
  logicaldrive 1 (1.4 TB, RAID 5, Recovering, 0% complete)
  physicaldrive 1I:0:1 (port 1I:box 0:bay 1, SATA, 500 GB, OK)
@@ -37,7 +37,7 @@ hpacucli ctrl slot=0 modify dwc=enable
 hpacucli rescandetects newly added devices since the last rescan
 
 Изменение Cache Ratio:
-hpacucli ctrl slot=3 modify cacheratio=25/75
+hpacucli ctrl slot=0 modify cacheratio=25/75
 
 Управление физическими дисками в массиве
 
