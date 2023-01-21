@@ -2,29 +2,29 @@
 
 hpacucli ctrl all show config
 
-Smart Array P420i in Slot 0 (Embedded)    (sn: 00143802754BD10)
+    Smart Array P420i in Slot 0 (Embedded)    (sn: 00143802754BD10)
 
-   array A (SAS, Unused Space: 0  MB)
-      logicaldrive 1 (136.7 GB, RAID 1, OK)
+    array A (SAS, Unused Space: 0  MB)
+        logicaldrive 1 (136.7 GB, RAID 1, OK)
 
-      physicaldrive 1I:1:1 (port 1I:box 1:bay 1, SAS, 146.8 GB, OK)
-      physicaldrive 1I:1:2 (port 1I:box 1:bay 2, SAS, 146.8 GB, OK)
+        physicaldrive 1I:1:1 (port 1I:box 1:bay 1, SAS, 146.8 GB, OK)
+        physicaldrive 1I:1:2 (port 1I:box 1:bay 2, SAS, 146.8 GB, OK)
 
-   array B (Solid State SATA, Unused Space: 0  MB)
-      logicaldrive 2 (447.1 GB, RAID 1, OK)
+    array B (Solid State SATA, Unused Space: 0  MB)
+        logicaldrive 2 (447.1 GB, RAID 1, OK)
 
-      physicaldrive 1I:1:3 (port 1I:box 1:bay 3, Solid State SATA, 480.1 GB, OK)
-      physicaldrive 1I:1:4 (port 1I:box 1:bay 4, Solid State SATA, 480.1 GB, OK)
+        physicaldrive 1I:1:3 (port 1I:box 1:bay 3, Solid State SATA, 480.1 GB, OK)
+        physicaldrive 1I:1:4 (port 1I:box 1:bay 4, Solid State SATA, 480.1 GB, OK)
 
-   array C (SAS, Unused Space: 0  MB)
-      logicaldrive 3 (1.1 TB, RAID 1+0, OK)
+    array C (SAS, Unused Space: 0  MB)
+        logicaldrive 3 (1.1 TB, RAID 1+0, OK)
 
-      physicaldrive 2I:1:5 (port 2I:box 1:bay 5, SAS, 600 GB, OK)
-      physicaldrive 2I:1:6 (port 2I:box 1:bay 6, SAS, 600 GB, OK)
-      physicaldrive 2I:1:7 (port 2I:box 1:bay 7, SAS, 600 GB, OK)
-      physicaldrive 2I:1:8 (port 2I:box 1:bay 8, SAS, 600 GB, OK)
+        physicaldrive 2I:1:5 (port 2I:box 1:bay 5, SAS, 600 GB, OK)
+        physicaldrive 2I:1:6 (port 2I:box 1:bay 6, SAS, 600 GB, OK)
+        physicaldrive 2I:1:7 (port 2I:box 1:bay 7, SAS, 600 GB, OK)
+        physicaldrive 2I:1:8 (port 2I:box 1:bay 8, SAS, 600 GB, OK)
 
-   SEP (Vendor ID PMCSIERA, Model SRCv8x6G) 380 (WWID: 500143802754BD1F)
+    SEP (Vendor ID PMCSIERA, Model SRCv8x6G) 380 (WWID: 500143802754BD1F)
 
 Сокращения, которые можно использовать в командах
 
@@ -60,6 +60,28 @@ hpacucli ctrl slot=0 modify cacheratio=25/75
 Показать информацию (детально)
 hpacucli ctrl slot=0 pd all show
 hpacucli ctrl slot=0 pd 1I:1:3 show
+
+    array B
+
+        physicaldrive 1I:1:3
+            Port: 1I
+            Box: 1
+            Bay: 3
+            Status: OK
+            Drive Type: Data Drive
+            Interface Type: Solid State SATA
+            Size: 480.1 GB
+            Firmware Revision: SAJ20104
+            Serial Number: 50026B7784B4E81F    
+            Model: ATA     KINGSTON SA400S3
+            SATA NCQ Capable: True
+            SATA NCQ Enabled: True
+            SSD Smart Trip Wearout: Not Supported
+            PHY Count: 1
+            PHY Transfer Rate: 6.0Gbps
+            Drive Authentication Status: OK
+            Carrier Application Version: 11
+            Carrier Bootloader Version: 6
 
 Можно указать определенный слот для отображения информации только по определенному диску
 
