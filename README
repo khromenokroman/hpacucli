@@ -2,13 +2,29 @@
 
 hpacucli ctrl all show config
 
-Smart Array P400 in Slot 0 (sn: PA5360J9STT1T1)
- array A (SATA, Unused Space: 0 MB)
- logicaldrive 1 (1.4 TB, RAID 5, Recovering, 0% complete)
- physicaldrive 1I:0:1 (port 1I:box 0:bay 1, SATA, 500 GB, OK)
- physicaldrive 1I:0:2 (port 1I:box 0:bay 2, SATA, 500 GB, OK)
- physicaldrive 1I:0:3 (port 1I:box 0:bay 3, SATA, 500 GB, OK)
- physicaldrive 1I:0:4 (port 1I:box 0:bay 4, SATA, 1 TB, Rebuilding)
+Smart Array P420i in Slot 0 (Embedded)    (sn: 00143802754BD10)
+
+   array A (SAS, Unused Space: 0  MB)
+      logicaldrive 1 (136.7 GB, RAID 1, OK)
+
+      physicaldrive 1I:1:1 (port 1I:box 1:bay 1, SAS, 146.8 GB, OK)
+      physicaldrive 1I:1:2 (port 1I:box 1:bay 2, SAS, 146.8 GB, OK)
+
+   array B (Solid State SATA, Unused Space: 0  MB)
+      logicaldrive 2 (447.1 GB, RAID 1, OK)
+
+      physicaldrive 1I:1:3 (port 1I:box 1:bay 3, Solid State SATA, 480.1 GB, OK)
+      physicaldrive 1I:1:4 (port 1I:box 1:bay 4, Solid State SATA, 480.1 GB, OK)
+
+   array C (SAS, Unused Space: 0  MB)
+      logicaldrive 3 (1.1 TB, RAID 1+0, OK)
+
+      physicaldrive 2I:1:5 (port 2I:box 1:bay 5, SAS, 600 GB, OK)
+      physicaldrive 2I:1:6 (port 2I:box 1:bay 6, SAS, 600 GB, OK)
+      physicaldrive 2I:1:7 (port 2I:box 1:bay 7, SAS, 600 GB, OK)
+      physicaldrive 2I:1:8 (port 2I:box 1:bay 8, SAS, 600 GB, OK)
+
+   SEP (Vendor ID PMCSIERA, Model SRCv8x6G) 380 (WWID: 500143802754BD1F)
 
 Сокращения, которые можно использовать в командах
 
@@ -43,59 +59,59 @@ hpacucli ctrl slot=0 modify cacheratio=25/75
 
 Показать информацию (детально)
 hpacucli ctrl slot=0 pd all show
-hpacucli ctrl slot=0 pd 2:3 show detail
+hpacucli ctrl slot=0 pd 1I:1:3 show
 
 Можно указать определенный слот для отображения информации только по определенному диску
 
 Статус дисков
 hpacucli ctrl slot=0 pd all show status
-hpacucli ctrl slot=0 pd 2:3 show status
+hpacucli ctrl slot=0 pd 1I:1:3 show status
 
 Очистка
 hpacucli ctrl slot=0 pd 2:3 modify erase
 
 Управление диодами на дисках
-hpacucli ctrl slot=0 pd 2:3 modify led=on
-hpacucli ctrl slot=0 pd 2:3 modify led=off
+hpacucli ctrl slot=0 pd 1I:1:3 modify led=on
+hpacucli ctrl slot=0 pd 1I:1:3 modify led=off
 
 Управление логическими дисками
 
 Показать информацию (детально)
-hpacucli ctrl slot=0 ld all show [detail]
-hpacucli ctrl slot=0 ld 4 show [detail]
+hpacucli ctrl slot=0 ld all show
+hpacucli ctrl slot=0 ld 2 show
 
 Статус дисков
 hpacucli ctrl slot=0 ld all show status
-hpacucli ctrl slot=0 ld 4 show status
+hpacucli ctrl slot=0 ld 2 show status
 
 Управление диодами на дисках
-hpacucli ctrl slot=0 ld 4 modify led=on
-hpacucli ctrl slot=0 ld 4 modify led=off
+hpacucli ctrl slot=0 ld 2 modify led=on
+hpacucli ctrl slot=0 ld 2 modify led=off
 
 Перезапустить «отказавшие» диски
-hpacucli ctrl slot=0 ld 4 modify reenable forced
+hpacucli ctrl slot=0 ld 2 modify reenable forced
 
 Создание дисков
 логический диск
-hpacucli ctrl slot=0 create type=ld drives=1:12 raid=0
+hpacucli ctrl slot=0 create type=ld drives=1I:1:3 raid=0
 
 логический диск — чередование
-hpacucli ctrl slot=0 create type=ld drives=1:13,1:14 size=300 raid=1
+hpacucli ctrl slot=0 create type=ld drives=1I:1:3,1I:1:4 size=300 raid=1
 
 логический диск — raid 5
-hpacucli ctrl slot=0 create type=ld drives=1:13,1:14,1:15,1:16,1:17 raid=5 
+hpacucli ctrl slot=0 create type=ld drives=1I:1:3,1I:1:4,1I:1:5,1I:1:6,1I:1:7 raid=5 
 drives — конкретные диски, все диски (all drives) или неиспользуемые диски(unassigned drives)
 size -размер логического диска в Мб
 raid — тип raid 0, 1 , 1+0 and 5
 
 Удаление
-hpacucli ctrl slot=0 ld 4 delete
+hpacucli ctrl slot=0 ld 2 delete
 
 Добавление дисков
-hpacucli ctrl slot=0 ld 4 add drives=2:3
+hpacucli ctrl slot=0 ld 2 add drives=1I:1:3
 
 Добавление дискового пространства (принудительно)
-hpacucli> ctrl slot=0 ld 4 modify size=500 forced
+hpacucli> ctrl slot=0 ld 2 modify size=500 forced
 
 Добавление резервного диска spare
-hpacucli> ctrl slot=0 array all add spares=1:5,1:7
+hpacucli> ctrl slot=0 array all add spares=1I:1:3,1I:1:4
