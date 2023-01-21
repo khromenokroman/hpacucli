@@ -90,7 +90,7 @@ hpacucli ctrl slot=0 pd all show status
 hpacucli ctrl slot=0 pd 1I:1:3 show status
 
 Очистка
-hpacucli ctrl slot=0 pd 2:3 modify erase
+hpacucli ctrl slot=0 pd 1I:1:3 modify erase
 
 Управление диодами на дисках
 hpacucli ctrl slot=0 pd 1I:1:3 modify led=on
