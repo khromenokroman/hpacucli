@@ -1,0 +1,11 @@
+
+Smart Array P420i in Slot 0 (Embedded)
+
+   array A
+
+      logicaldrive 1 (136.7 GB, RAID 1, OK)
+
+   array B
+
+      logicaldrive 3 (558.9 GB, RAID 1, OK)
+
